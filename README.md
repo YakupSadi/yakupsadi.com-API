@@ -14,3 +14,9 @@
 - ``` npm install jsonwebtoken ```
 -  ``` npm install bcryptjs ```
 -  ``` npm install cookie-parser ```
+
+## .env
+- ``` PORT         = 3000 ```
+- ``` JWT_SECRET   = String ```
+- ``` JWT_LIFETIME = 30d ```
+- ``` MONGO_URL    = ```
