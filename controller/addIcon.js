@@ -34,39 +34,20 @@ const getAllIcons = asyncModule( async( req, res ) => {
 
 const createIcon = asyncModule( async( req, res, next ) => {
 
-    const { svgPath } = req.body
     const iconSVG     = req.file
     const data        = random.generate( 7 )
 
 
-    if( svgPath )
+    if( iconSVG )
     {
-        if( iconSVG )
-        {
-            fs.unlink( path.join( __dirname, '../', iconSVG.path ), ( err ) => {
+        let svgTitle = iconSVG.mimetype === 'image/svg+xml' ? 'svg' : 'img'
 
-                if( err )
-                {
-                    console.log( err )
-                }
-            })
-        }
-
-        await AddIcon.create({ image: svgPath, title: 'url', random: data })
+        await AddIcon.create({ image: iconSVG.path, title: svgTitle, random: data })
     }
     else
     {
-        if( iconSVG )
-        {
-            let svgTitle = iconSVG.mimetype === 'image/svg+xml' ? 'svg' : 'img'
-
-            await AddIcon.create({ image: iconSVG.path, title: svgTitle, random: data })
-        }
-        else
-        {
-            res.status( 400 ).json({ msg: 'Icon Fields Cannot Be Empty.' })
-            return next( new CustomError( 'Icon Fields Cannot Be Empty.', 400 ))
-        }
+        res.status( 400 ).json({ msg: 'Icon Fields Cannot Be Empty.' })
+        return next( new CustomError( 'Icon Fields Cannot Be Empty.', 400 ))
     }
 
 
