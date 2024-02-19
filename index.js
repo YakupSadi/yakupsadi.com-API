@@ -2,7 +2,7 @@ require( 'dotenv' ).config()
 
 const express = require( 'express' )
 const app     = express()
-const PORT    = process.env.PORT || 4000
+const PORT    = 'https://yakupsadi.com/api/v1/'
 
 
 // Database
